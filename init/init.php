@@ -1,4 +1,3 @@
-
 <?php
 try {
     $pdo = new PDO("mysql:dbname=MVC; host=localhost", 'root', 'poulet42');

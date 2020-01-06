@@ -1,0 +1,18 @@
+CREATE DATABASE IF NOT EXISTS  MVC CHARACTER  SET utf8 COLLATE  utf8_genral_ci;
+
+drop MVC.users IF EXISTS;
+
+CREATE TABLE IF NOT EXISTS MVC.users (
+    idUser INT PRIMARY KEY not null AUTO_INCREMENT,
+    firstNameUser varchar(50) NOT NULL,
+    lastNameUer VARCHAR(50) NOT NULL,
+    passwordUser varchar(50) NOT NULL,
+    mailUser varchar(50) NOT NULL,
+    cellUser int(8) NOT NULL
+);
+
+INSERT INTO MVC.users(firstNameUser, lastNameUer, cellUser, passwordUser, mailUser)VALUES
+('Eliot', 'hell', 06666666,'123pwd','jesuisunemail@mail.mail' ),
+('Eliote', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail'),
+('Eliot', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail');
+
