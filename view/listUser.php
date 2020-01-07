@@ -12,5 +12,5 @@ echo "</ul>";
 
 
 $content = ob_get_clean();
-require('view/template.php');
+require('../view/template.php');
 ?>
