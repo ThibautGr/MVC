@@ -1,5 +1,5 @@
 <?php
-require "../model/ProductModel.php";
+require "../loader/autoloader.php";
 use  Dta\MVC\Model\ProductModel;
 
 $ProductModel = new ProductModel();

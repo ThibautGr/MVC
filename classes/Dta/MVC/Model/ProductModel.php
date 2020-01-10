@@ -2,7 +2,7 @@
 
 
 namespace Dta\MVC\Model;
-
+use Dta\MVC\Domain\Product;
 require "Manager.php";
 class ProductModel extends Manager
 {
@@ -14,4 +14,6 @@ class ProductModel extends Manager
         return $result;
 
         }
+
 }
+

@@ -29,3 +29,25 @@ INSERT INTO MVC.product(nameProduct, priceProduct,description, popularity)VALUES
 ('superToy', 10,'un super toy qui déchire tout !', 5.23),
 ('superToy2', 250,'la version encore mieux de super toy !', 6.2),
 ('objetNul',1,'un objet nul et pas forcement utile',0.5);
+
+DROP TABLE IF EXISTS MVC.favorite;
+CREATE TABLE IF NOT EXISTS MVC.favorite(
+    idProduct INT NOT NULL,
+    idUser INT(11) NOT NULL,
+    CONSTRAINT `idProduct_ibfk_1` FOREIGN KEY (`idProduct`) REFERENCES `product` (`idProduct`),
+    CONSTRAINT `idUser_idfk_1` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`)
+    );
+
+INSERT INTO MVC.favorite(idProduct, idUser) VALUES
+(1,2),
+(2,2),
+(3,2),
+(1,1);
+
+/* Requette sql en double join pour récupere les noms des produit favorit */
+
+SELECT product.nameProduct
+FROM product
+         INNER JOIN  favorite on product.idProduct = favorite.idProduct
+         INNER JOIN users ON favorite.idUser = users.idUser
+WHERE users.idUser = 2

@@ -1,5 +1,5 @@
 <?php
-$title = "Listes des 2 meillieurs produits :";
+$title = "Listes des 5 meillieurs produits :";
 ob_start();
 echo "<ul>";
 foreach ($products as  $product){

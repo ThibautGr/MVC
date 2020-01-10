@@ -1,17 +1,20 @@
 <?php
 
-    require "../loader/autoloader.php";
+require "../loader/autoloader.php";
 
-    use  Dta\MVC\Model\UsersManager;
+use  Dta\MVC\Model\UsersManager;
 
-    $managerUser = new UsersManager();
+$managerUser = new UsersManager();
+
+
+
+
+if(isset($_GET["id"])){
+    $id = ($_GET["id"]);
+    $user = $managerUser->getUser($id);
+    require "../view/user.php";
+}
+else{
     $users = $managerUser->getUsers();
-
     require "../view/listUser.php";
-
-
-/*
-    if(isset($_GET[$user->idUser])){
-
-    }
-*/
+}
