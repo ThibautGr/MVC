@@ -1,6 +1,6 @@
 CREATE DATABASE IF NOT EXISTS  MVC CHARACTER  SET utf8 COLLATE  utf8_genral_ci;
 
-drop MVC.users IF EXISTS;
+drop table IF EXISTS MVC.users ;
 
 CREATE TABLE IF NOT EXISTS MVC.users (
     idUser INT PRIMARY KEY not null AUTO_INCREMENT,
@@ -16,3 +16,16 @@ INSERT INTO MVC.users(firstNameUser, lastNameUer, cellUser, passwordUser, mailUs
 ('Eliote', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail'),
 ('Eliot', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail');
 
+drop table if EXISTS MVC.product;
+CREATE TABLE IF NOT EXISTS MVC.product (
+    idProduct INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+    nameProduct VARCHAR(50) NOT NULL ,
+    priceProduct int(11) NOT NULL ,
+    description text(500) NOT NULL ,
+    popularity decimal(5,2)
+);
+
+INSERT INTO MVC.product(nameProduct, priceProduct,description, popularity)VALUES
+('superToy', 10,'un super toy qui déchire tout !', 5.23),
+('superToy2', 250,'la version encore mieux de super toy !', 6.2),
+('objetNul',1,'un objet nul et pas forcement utile',0.5);

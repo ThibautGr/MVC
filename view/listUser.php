@@ -4,10 +4,10 @@ $title = 'Users';
 ob_start();
 
 echo "<ul>";
-foreach ($req as $user){
-    echo "<li>".$user["firstNameUser"]." ". $user["lastNameUer"]." ".$user["mailUser"]." </li>";
+foreach ($users as  $user){
+    echo "<li><a href='../controller/userController.php?id=' ".$user->idUser." >". $user->firstNameUser." ".$user->lastNameUer."</a> </li>";
 }
-$req->closeCursor();
+
 echo "</ul>";
 
 
