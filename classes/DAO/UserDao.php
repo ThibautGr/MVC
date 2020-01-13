@@ -33,9 +33,7 @@ class UserDao extends DAOBase {
 }
 
     public function findUserById($id) {
-
-        $result = NULL;
-
+        $user = null;
         $query = $this->bdd->prepare("SELECT idUser, firstNameUser, lastNameUer FROM user where idUser = :id");
 
         $query->bindParam(":id", $id);
@@ -43,18 +41,18 @@ class UserDao extends DAOBase {
         if ($query->execute()) {
 
             if ($donnees = $query->fetch()) {
+            $user = new User();
+            $user->idUser = $donnees["idUser"];
+            $user->firstNameUser = $donnees["firstNameUser"];
+            $user->lastNameUer = $donnees["lastNameUer"];
 
-                $idUser = $donnees["idUser"];
-                $firstNameUser = $donnees["firstNameUser"];
-                $lastNameUer = $donnees["lastNameUer"];
 
-                $result = new User($idUser, $firstNameUser, $lastNameUer);
             }
         }
 
         $query->closeCursor();
 
-        return $result;
+        return $user;
     }
 
     public function insertUser($user) {

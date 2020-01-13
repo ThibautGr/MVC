@@ -6,8 +6,8 @@ ob_start();
 
 echo "<ul>";
 
-    echo "<li> " . $user->firstNameUser . " " . $user->lastNameUer . "</li>";
-
+    echo "<li> " . $userr->firstNameUser . " " . $userr->lastNameUer . "</li>";
+    var_dump($usersDao);
 
 echo "</ul>";
 
