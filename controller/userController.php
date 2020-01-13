@@ -1,20 +1,16 @@
 <?php
-
-require "../loader/autoloader.php";
-
-use  Dta\MVC\Model\UsersManager;
-
-$managerUser = new UsersManager();
+include '../inc/autoloader.php';
+use DAO\UserDao;
+use Domain\User;
 
 
 
+// use Domain\User;
 
-if(isset($_GET["id"])){
-    $id = ($_GET["id"]);
-    $user = $managerUser->getUser($id);
-    require "../view/user.php";
-}
-else{
-    $users = $managerUser->getUsers();
-    require "../view/listUser.php";
-}
+$config = include '../inc/config.inc';
+
+$usersDao = new UserDao($config);
+$users = $usersDao->findAllUsers();
+
+
+require "../view/listUser.php";

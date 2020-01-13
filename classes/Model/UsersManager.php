@@ -1,5 +1,5 @@
 <?php
-namespace Dta\Model;
+namespace Model;
 use Domain\User;
 
 

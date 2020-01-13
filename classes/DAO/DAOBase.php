@@ -1,7 +1,7 @@
 <?php
 namespace DAO;
 
-class DaoBase
+class DAOBase
 {
     protected $bdd;
 

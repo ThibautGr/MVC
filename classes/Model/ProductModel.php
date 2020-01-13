@@ -1,8 +1,8 @@
 <?php
 
 
-namespace Dta\MVC\Model;
-use Dta\MVC\Domain\Product;
+namespace Model;
+use Domain\Product;
 require "Manager.php";
 class ProductModel extends Manager
 {

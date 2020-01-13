@@ -6,3 +6,9 @@ return array(
     'db.password' =>'poulet42',
     'db.name' => 'MVC'
 );
+
+define('DB_HOST','localhost');
+define('DB_PORT',3306);
+define('DB_UNSERNAME','root');
+define('DB_PASSWORD','poulet42');
+define('DB_NAME','MVC');

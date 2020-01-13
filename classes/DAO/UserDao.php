@@ -2,9 +2,9 @@
 
 
 namespace DAO;
+use Domain\User;
 
-
-class UserDao extends DaoBase {
+class UserDao extends DAOBase {
     public function __construct($config) {
         parent::__construct($config);
     }
@@ -13,15 +13,16 @@ class UserDao extends DaoBase {
 
     $result = [];
 
-    $reponse = $this->bdd->query("SELECT idUser, firstNameUser, lastNameUer, mailUser FROM users order by id");
+    $reponse = $this->bdd->query("SELECT idUser, firstNameUser, lastNameUer, mailUser FROM users order by idUser");
 
     while ($donnees = $reponse->fetch()) {
 
-        $id = $donnees["id"];
-        $firstName = $donnees["firstname"];
-        $lastName = $donnees["lastname"];
+        $idUser = $donnees["idUser"];
+        $firstNameUser = $donnees["firstNameUser"];
+        $lastNameUer = $donnees["lastNameUer"];
+        $mailUser = $donnees["mailUser"];
 
-        $user = new User($id, $firstName, $lastName);
+        $user = new User($idUser, $firstNameUser, $lastNameUer,$mailUser);
 
         $result[] = $user;
     }
@@ -35,7 +36,7 @@ class UserDao extends DaoBase {
 
         $result = NULL;
 
-        $query = $this->bdd->prepare("SELECT id, firstname, lastname FROM user where id = :id");
+        $query = $this->bdd->prepare("SELECT idUser, firstNameUser, lastNameUer FROM user where idUser = :id");
 
         $query->bindParam(":id", $id);
 
@@ -43,11 +44,11 @@ class UserDao extends DaoBase {
 
             if ($donnees = $query->fetch()) {
 
-                $id = $donnees["id"];
-                $firstName = $donnees["firstname"];
-                $lastName = $donnees["lastname"];
+                $idUser = $donnees["idUser"];
+                $firstNameUser = $donnees["firstNameUser"];
+                $lastNameUer = $donnees["lastNameUer"];
 
-                $result = new User($id, $firstName, $lastName);
+                $result = new User($idUser, $firstNameUser, $lastNameUer);
             }
         }
 
