@@ -10,7 +10,7 @@
     <body>
 
         <header>
-            <h1><?= $title ?></h1>
+            <h1 class="text-center"><?= $title ?></h1>
         </header>
         <?= $content ?>
     </body>

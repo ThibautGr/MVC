@@ -1,5 +1,5 @@
 <?php
-$title = 'Add a user';
+$title = 'your acount is online, well job !';
 ob_start();
 
 

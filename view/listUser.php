@@ -8,13 +8,7 @@ ob_start();
 ?>
 
 
-<br />
-<div>
-	<a href="userController.php" class="btn black-background text-white">
-		<span class="glyphicon glyphicon-plus text-white"></span> Add user
-	</a>
-</div>
-<br />
+
 
 <table class="table table-striped">
 	<thead>
@@ -34,7 +28,7 @@ ob_start();
 			<th scope="row"><a href="userController.php?id=<?php echo $user->idUser ?>"><?php echo $user->idUser ?></a></th>
 			<td><?php echo $user->firstNameUser ?></td>
 			<td><?php echo $user->lastNameUer ?></td>
-			<td><a href="editUserController.php?id=<?php echo $user->idUser ?>"><i class="fas fa-edit"></i></a></td>
+			<td><a href="updateUserController.php?id=<?php echo $user->idUser ?>"><i class="fas fa-edit"></i></a></td>
 			<td><a href="deleteUserController.php?id=<?php echo $user->idUser ?>"><i class="far fa-trash-alt"></i></a></td>
 		</tr>
 <?php
@@ -42,7 +36,13 @@ ob_start();
 ?>
 	</tbody>
 </table>
-
+<br />
+<div class="text-center">
+    <a href="addUserController.php" class="btn black-background text-white">
+        <span class=" btn btn-primary"> Ajouter un utilisateur</span>
+    </a>
+</div>
+<br />
 <?php
 $content = ob_get_clean();
 ?>

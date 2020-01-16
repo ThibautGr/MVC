@@ -7,14 +7,13 @@ CREATE TABLE IF NOT EXISTS MVC.users (
     firstNameUser varchar(50) NOT NULL,
     lastNameUer VARCHAR(50) NOT NULL,
     passwordUser varchar(50) NOT NULL,
-    mailUser varchar(50) NOT NULL,
-    cellUser int(8) NOT NULL
+    mailUser varchar(50) NOT NULL
 );
 
-INSERT INTO MVC.users(firstNameUser, lastNameUer, cellUser, passwordUser, mailUser)VALUES
-('Eliot', 'hell', 06666666,'123pwd','jesuisunemail@mail.mail' ),
-('Eliote', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail'),
-('Eliot', 'hell', 06666666, '123pwd','jesuisunemail@mail.mail');
+INSERT INTO MVC.users(firstNameUser, lastNameUer, passwordUser, mailUser)VALUES
+('Eliot', 'hell','123pwd','jesuisunemail@mail.mail' ),
+('Eliote', 'hell', '123pwd','jesuisunemail@mail.mail'),
+('Eliot', 'hell', '123pwd','jesuisunemail@mail.mail');
 
 drop table if EXISTS MVC.product;
 CREATE TABLE IF NOT EXISTS MVC.product (

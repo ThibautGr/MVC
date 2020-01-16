@@ -13,16 +13,16 @@ class UserDao extends DAOBase {
 
     $result = [];
 
-    $reponse = $this->bdd->query("SELECT idUser, firstNameUser, lastNameUer, mailUser FROM users order by idUser");
+    $reponse = $this->bdd->query("SELECT idUser, firstNameUser, lastNameUer,passwordUser ,mailUser FROM users order by idUser");
 
     while ($donnees = $reponse->fetch()) {
-
         $idUser = $donnees["idUser"];
         $firstNameUser = $donnees["firstNameUser"];
         $lastNameUer = $donnees["lastNameUer"];
+        $passwordUser = $donnees["passwordUser"];
         $mailUser = $donnees["mailUser"];
 
-        $user = new User($idUser, $firstNameUser, $lastNameUer,$mailUser);
+        $user = new User($idUser, $firstNameUser, $lastNameUer,$passwordUser,$mailUser);
 
         $result[] = $user;
     }
@@ -34,35 +34,54 @@ class UserDao extends DAOBase {
 
     public function findUserById($id) {
         $user = null;
-        $query = $this->bdd->prepare("SELECT idUser, firstNameUser, lastNameUer FROM user where idUser = :id");
+        $query = $this->bdd->prepare("SELECT idUser, firstNameUser, lastNameUer,passwordUser,mailUser FROM users where idUser = :id");
 
         $query->bindParam(":id", $id);
 
         if ($query->execute()) {
 
             if ($donnees = $query->fetch()) {
-            $user = new User();
-            $user->idUser = $donnees["idUser"];
-            $user->firstNameUser = $donnees["firstNameUser"];
-            $user->lastNameUer = $donnees["lastNameUer"];
-
+            $user = new User(
+            $donnees["idUser"],
+            $donnees["firstNameUser"],
+            $donnees["lastNameUer"],
+            $donnees["passwordUser"],
+            $donnees["mailUser"]
+            );
 
             }
         }
-
         $query->closeCursor();
 
         return $user;
     }
+    function getUser($id){
+        $user = null;
 
+        $req = $this->bdd->prepare("SELECT idUser,firstNameUser,lastNameUer,passwordUser,mailUser FROM users WHERE idUser=:id");
+        $req->bindParam(":id",$id);
+        if($req->execute()){
+            if ($data = $req ->fetch()){
+                $user = new User($data["idUser"],
+                    $data["firstNameUser"],
+                    $data["lastNameUer"],
+                    $data["passwordUser"],
+                    $data["mailUser"]
+                );
+
+            }
+
+        }
+        return $user;
+    }
     public function insertUser($user) {
 
-        $result;
+        $query = $this->bdd->prepare("INSERT INTO users (idUser, firstNameUser, lastNameUer, passwordUser, mailUser) VALUES (null, :firstName, :lastName,:passwordUser, :mailUser)");
 
-        $query = $this->bdd->prepare("INSERT INTO user (firstname, lastname) VALUES (:firstName, :lastName)");
-
-        $query->bindParam(":firstName", $user->firstName);
-        $query->bindParam(":lastName", $user->lastName);
+        $query->bindParam(":firstName", $user->firstNameUser);
+        $query->bindParam(":lastName", $user->lastNameUer);
+        $query->bindParam(":mailUser", $user->mailUser);
+        $query->bindParam(":passwordUser", $user->passwordUser);
 
         $query->execute();
 
@@ -74,25 +93,39 @@ class UserDao extends DAOBase {
     }
 
     public function deleteUser($id) {
-
-        $query = $this->bdd->prepare("DELETE FROM user WHERE id = :id");
+        $result = null;
+        $query = $this->bdd->prepare("DELETE FROM users WHERE idUser = :id");
 
         $query->bindParam(":id", $id);
 
-        $query->execute();
+        $result = $query->execute();
+
+
+        // Modifie les id de la table en partant de 1.
+        $req = $this->bdd->prepare('SET @count = 0;
+        UPDATE users SET users.idUser = @count:= @count + 1;');
+        $req->execute();
+
+        // Redéfinit l'auto incrémentation de la table.
+        $req = $this->bdd->prepare('ALTER TABLE users AUTO_INCREMENT = 1;');
+        $req->execute();
+
+        return $result;
     }
 
     public function updateUser($user) {
 
-        $result;
+        $query = $this->bdd->prepare("UPDATE users SET  firstNameUser=:firstNameUser, lastNameUer=:lastNameUer, mailUser = :mailUser, passwordUser=:passwordUser WHERE idUser = :id");
 
-        $query = $this->bdd->prepare("UPDATE user SET firstname = :firstName, lastname = :lastName WHERE id = :id");
+        $query->bindParam(":id", $user->idUser);
 
-        $query->bindParam(":firstName", $user->firstName);
+        $query->bindParam(":firstNameUser", $user->firstNameUser);
 
-        $query->bindParam(":lastName", $user->lastName);
+        $query->bindParam(":lastNameUer", $user->lastNameUer);
 
-        $query->bindParam(":id", $user->id);
+        $query->bindParam(":passwordUser", $user->passwordUser);
+
+        $query->bindParam(":mailUser", $user->mailUser);
 
         $query->execute();
     }
