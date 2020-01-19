@@ -17,6 +17,5 @@ if(isset($_GET['id'])){
 }
 else{
     require '../view/listUser.php';
-
 }
 

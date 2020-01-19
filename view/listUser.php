@@ -6,10 +6,6 @@ $title = 'List of Users';
 <?php
 ob_start();
 ?>
-
-
-
-
 <table class="table table-striped">
 	<thead>
 		<tr>
@@ -18,6 +14,7 @@ ob_start();
 			<th>Last Name</th>
 			<th>Edit</th>
 			<th>Delete</th>
+            <th>Favorite</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -30,6 +27,7 @@ ob_start();
 			<td><?php echo $user->lastNameUer ?></td>
 			<td><a href="updateUserController.php?id=<?php echo $user->idUser ?>"><i class="fas fa-edit"></i></a></td>
 			<td><a href="deleteUserController.php?id=<?php echo $user->idUser ?>"><i class="far fa-trash-alt"></i></a></td>
+            <td><a href="favoriteByUserController.php?id=<?php echo $user->idUser ?>"> <i class="far fa-star"></i></a></td>
 		</tr>
 <?php
         }

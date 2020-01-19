@@ -28,7 +28,6 @@ class UserDao extends DAOBase {
     }
 
     $reponse->closeCursor();
-
     return $result;
 }
 
@@ -39,7 +38,6 @@ class UserDao extends DAOBase {
         $query->bindParam(":id", $id);
 
         if ($query->execute()) {
-
             if ($donnees = $query->fetch()) {
             $user = new User(
             $donnees["idUser"],
@@ -48,7 +46,6 @@ class UserDao extends DAOBase {
             $donnees["passwordUser"],
             $donnees["mailUser"]
             );
-
             }
         }
         $query->closeCursor();
